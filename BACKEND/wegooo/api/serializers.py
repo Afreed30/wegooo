@@ -1,18 +1,28 @@
 from rest_framework import serializers
-from wegoooapp.models import bus_details,Booking,route_info,user
-class BusDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = bus_details
-        fields = ['bus_number', 'route', 'capacity', 'created_at', 'updated_at']
-class BookingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Booking
-        fields = ['user', 'bus', 'seat_number', 'booking_date']
-class routeinfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = route_info
-        fields = ['route_name', 'start_location', 'end_location', 'distance_km']
+from .models import User, BusDetails, Booking, RouteInfo
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
-        fields = ['username', 'email', 'password', 'created_at', 'updated_at']
+        model = User
+        fields = ['id', 'username', 'email', 'password', 'created_at', 'updated_at']
+
+
+class BusDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusDetails
+        fields = ['id', 'bus_number', 'route', 'capacity', 'created_at', 'updated_at']
+
+
+class RouteInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RouteInfo
+        fields = ['id', 'route_name', 'start_location', 'end_location', 'distance_km']
+
+
+class BookingSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    bus = BusDetailsSerializer(read_only=True)
+
+    class Meta:
+        model = Booking
+        fields = ['id', 'user', 'bus', 'seat_number', 'booking_date']
