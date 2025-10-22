@@ -1,28 +1,24 @@
 from rest_framework import serializers
-from .models import User, BusDetails, Booking, RouteInfo
+from .models import bus_details, booking, route_info, user
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'password', 'created_at', 'updated_at']
-
+        model = user
+        fields = '__all__'
 
 class BusDetailsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BusDetails
-        fields = ['id', 'bus_number', 'route', 'capacity', 'created_at', 'updated_at']
-
-
-class RouteInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RouteInfo
-        fields = ['id', 'route_name', 'start_location', 'end_location', 'distance_km']
-
+        model = bus_details
+        fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    bus = BusDetailsSerializer(read_only=True)
-
+    user = serializers.StringRelatedField()
+    bus = serializers.StringRelatedField()
     class Meta:
-        model = Booking
-        fields = ['id', 'user', 'bus', 'seat_number', 'booking_date']
+        model = booking
+        fields = '__all__'
+
+class routeinfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = route_info
+        fields = '__all__'

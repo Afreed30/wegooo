@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+
 urlpatterns = [
-    path('user/',views.UserListCreateAPIView.as_view(), name='user-list-create'),
-    ]
+    path('buses/', views.list_buses),
+    path('booking/', views.create_booking),
+    path('payment/', views.create_payment),
+]
