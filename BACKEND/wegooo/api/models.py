@@ -1,10 +1,6 @@
 from django.db import models
-from io import BytesIO
-from django.core.files import File
-import qrcode
-from django.contrib.auth.models import User
-# Create your models here.
 
+# Create your models here.
 class user(models.Model):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
@@ -13,45 +9,67 @@ class user(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.username
-
-class bus_details(models.Model):
+class bus(models.Model):
+    bus_type = [
+        ('AC', 'Air Conditioned'),
+        ('Non-AC', 'Non Air Conditioned'),
+        ('Sleeper', 'Sleeper'),
+        ('Seater', 'Seater'),
+    ]
     bus_number = models.CharField(max_length=20, unique=True)
-    route = models.CharField(max_length=255)
-    capacity = models.IntegerField()
+    bus_name = models.CharField(max_length=100)
+    bus_type = models.CharField(max_length=10, choices=bus_type)
+    total_seats = models.IntegerField()
+    amenities = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class route(models.Model):
+   from_location = models.CharField(max_length=100)
+   to_location = models.CharField(max_length=100)
+   distance_km = models.FloatField(help_text="Distance in kilometers")
+   duration = models.DurationField(help_text="Estimated travel duration") 
+   base_fare = models.DecimalField(max_digits=10, decimal_places=2)
+   created_at = models.DateTimeField(auto_now_add=True)
+   def __str__(self):
+       return f"{self.from_location} to {self.to_location}"
+class schedule(models.Model):
+    bus = models.ForeignKey(bus, on_delete=models.CASCADE)
+    route = models.ForeignKey(route, on_delete=models.CASCADE)
+    departure_time = models.DateTimeField()
+    arrival_time = models.DateTimeField()
+    available_seats = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.bus_number
-
-class route_info(models.Model):
-    route_name = models.CharField(max_length=255, unique=True)
-    start_location = models.CharField(max_length=255)
-    end_location = models.CharField(max_length=255)
-    distance_km = models.FloatField()
-    def __str__(self):
-        return self.route_name
-
+        return f"{self.bus.bus_name} on {self.route} at {self.departure_time}"
+class seat(models.Model):
+    seat_type = [
+        ('WINDOW', 'window'),
+        ('AISLE', 'aisle'),
+        ('MIDDLE', 'middle'),
+    ]
+    schedule = models.ForeignKey(schedule, on_delete=models.CASCADE)
+    seat_number = models.CharField(max_length=5)
+    seat_type = models.CharField(max_length=10, choices=seat_type)
+    is_booked = models.BooleanField(default=False)
+    def __str__(self): 
+        return f"Seat {self.seat_number} on {self.schedule}"
 class booking(models.Model):
-    STATUS_CHOICES = [('pending','Pending'),('confirmed','Confirmed'),('cancelled','Cancelled')]
+    booking_status = [
+        ('CONFIRMED', 'Confirmed'),
+        ('CANCELLED', 'Cancelled'),
+        ('PENDING', 'Pending'),
+    ]
     user = models.ForeignKey(user, on_delete=models.CASCADE)
-    bus = models.ForeignKey(bus_details, on_delete=models.CASCADE)
-    seat_number = models.IntegerField()
+    schedule = models.ForeignKey(schedule, on_delete=models.CASCADE)
+    seat = models.ForeignKey(seat, on_delete=models.CASCADE)
+    booking_number = models.CharField(max_length=20, unique=True)
+    passenger_name = models.CharField(max_length=100)
+    passenger_age = models.IntegerField()
+    passenger_gender = models.CharField(max_length=10)
+    passenger_number = models.CharField(max_length=15)
     booking_date = models.DateTimeField(auto_now_add=True)
-    payment_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True)
-
+    total_fare = models.DecimalField(max_digits=10, decimal_places=2)
+    booking_status = models.CharField(max_length=10, choices=booking_status)
+    
     def __str__(self):
-        return f"Booking {self.id} by {self.user.username} on {self.bus.bus_number}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        try:
-            qr_data = f"Booking ID: {self.id}, User: {self.user.username}, Bus: {self.bus.bus_number}, Seat: {self.seat_number}"
-            qr_img = qrcode.make(qr_data)
-            buffer = BytesIO()
-            qr_img.save(buffer, 'PNG')
-            self.qr_code.save(f'booking_{self.id}.png', File(buffer), save=False)
-            buffer.close()
-            super().save(update_fields=['qr_code'])
-        except Exception:
-            pass
+        return f"Booking {self.booking_number} for {self.passenger_name}"
+    
