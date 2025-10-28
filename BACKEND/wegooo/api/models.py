@@ -22,6 +22,8 @@ class bus(models.Model):
     total_seats = models.IntegerField()
     amenities = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.bus_name} ({self.bus_number})"
 class route(models.Model):
    from_location = models.CharField(max_length=100)
    to_location = models.CharField(max_length=100)
