@@ -22,10 +22,14 @@ class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = seat
         fields = '__all__' 
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = booking
+        fields = '__all__'
 class UserregisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
-        model = user
+        model = User
         fields = ['username', 'email', 'password']
     def create(self, validated_data):
         user_instance = user(
