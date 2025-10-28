@@ -27,7 +27,7 @@ class route(models.Model):
    to_location = models.CharField(max_length=100)
    distance_km = models.FloatField(help_text="Distance in kilometers")
    duration = models.DurationField(help_text="Estimated travel duration") 
-   base_fare = models.DecimalField(max_digits=10, decimal_places=2)
+   base_fare = models.DecimalField(max_digits=10,decimal_places=2)
    created_at = models.DateTimeField(auto_now_add=True)
    def __str__(self):
        return f"{self.from_location} to {self.to_location}"
