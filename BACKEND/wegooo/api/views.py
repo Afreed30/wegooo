@@ -17,7 +17,7 @@ from .serializers import (
     BookingSerializer,
 )
 
-# ----------------------------- USER AUTH VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>USER AUTH VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
@@ -51,7 +51,7 @@ def login_user(request):
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-# ----------------------------- BUS VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>> BUS VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -72,7 +72,7 @@ def add_bus(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ----------------------------- ROUTE VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>> ROUTE VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -93,7 +93,7 @@ def add_route(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ----------------------------- SCHEDULE VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>> SCHEDULE VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -114,7 +114,7 @@ def add_schedule(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# ----------------------------- SEAT VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>> SEAT VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -124,7 +124,7 @@ def get_seats_by_schedule(request, schedule_id):
     return Response(serializer.data)
 
 
-# ----------------------------- BOOKING VIEWS -----------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>> BOOKING VIEWS <<<<<<<<<<<<<<<<<<<<<<<<<<<
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
