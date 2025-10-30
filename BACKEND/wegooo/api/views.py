@@ -62,7 +62,7 @@ def list_buses(request):
 
 
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
+@authentication_classes([TokenAuthentication])   
 @permission_classes([IsAuthenticated])
 def add_bus(request):
     serializer = BusSerializer(data=request.data)
