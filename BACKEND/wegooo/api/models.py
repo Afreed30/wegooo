@@ -11,14 +11,15 @@ class user(models.Model):
         return self.username
 class bus(models.Model):
     bus_type = [
-        ('AC', 'Air Conditioned'),
-        ('Non-AC', 'Non Air Conditioned'),
-        ('Sleeper', 'Sleeper'),
-        ('Seater', 'Seater'),
+        ('SEATER_NON_AC', 'Seater Non-A/C'),
+        ('SLEEPER_NON_AC', 'Sleeper Non-A/C'),
+        ('SEATER_AC', 'Seater A/C'),
+        ('SLEEPER_AC', 'Sleeper A/C'),
+        ('SLEEPER & SEATER_AC','Sleeper/Seater A/C'),
     ]
     bus_number = models.CharField(max_length=20, unique=True)
     bus_name = models.CharField(max_length=100)
-    bus_type = models.CharField(max_length=10, choices=bus_type)
+    bus_type = models.CharField(max_length=50, choices=bus_type)
     total_seats = models.IntegerField()
     amenities = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -47,6 +48,8 @@ class seat(models.Model):
         ('WINDOW', 'window'),
         ('AISLE', 'aisle'),
         ('MIDDLE', 'middle'),
+        ('UPPER', 'upper'),
+        ('LOWER', 'lower'),
     ]
     schedule = models.ForeignKey(schedule, on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=5)
