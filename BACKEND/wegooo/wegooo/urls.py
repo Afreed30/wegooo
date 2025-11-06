@@ -1,23 +1,38 @@
-"""
-URL configuration for wegooo project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
+from django.http import JsonResponse
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from api import views  # ✅ Import your new signup/login views
+
+def home(request):
+    return JsonResponse({
+        "message": "🚍 Bus Booking API is running",
+        "routes": [
+            "/admin/",
+            "/api/",
+            "/api/signup/",
+            "/api/login/",
+            "/api/token/",
+            "/api/token/refresh/",
+            "/api/register-bus/",
+            "/api/cities/",
+            "/api/search_buses/"
+        ]
+    })
+
 
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
-    path('api/',include('api.urls')),
+
+    # ✅ Main API endpoints
+    path('api/', include('api.urls')),
+
+    # ✅ User authentication routes
+    path('api/signup/', views.signup_user, name='signup_user'),
+    path('api/login/', views.login_user, name='login_user'),
+
+    # ✅ JWT authentication (still available if needed)
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

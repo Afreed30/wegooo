@@ -1,61 +1,66 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from .models import user, bus, route, schedule, seat, booking
-from django.contrib.auth.password_validation import validate_password
-from rest_framework.validators import UniqueValidator
+from .models import Bus, Route, Schedule, Booking
 
-# Serializer for your custom `user` model (if you still use it elsewhere)
-class AppUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = user
-        fields = '__all__'
 
+# -------------------------------------------------------------------
+# ✅ Bus Serializer
+# -------------------------------------------------------------------
 class BusSerializer(serializers.ModelSerializer):
     class Meta:
-        model = bus
+        model = Bus
         fields = '__all__'
 
+
+# -------------------------------------------------------------------
+# ✅ Route Serializer
+# -------------------------------------------------------------------
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = route
+        model = Route
         fields = '__all__'
 
+
+# -------------------------------------------------------------------
+# ✅ Schedule Serializer
+# -------------------------------------------------------------------
 class ScheduleSerializer(serializers.ModelSerializer):
+    bus_name = serializers.CharField(source='bus.name', read_only=True)
+    travels_name = serializers.CharField(source='bus.travels_name', read_only=True)
+    category = serializers.CharField(source='bus.category', read_only=True)
+    origin = serializers.CharField(source='route.origin', read_only=True)
+    destination = serializers.CharField(source='route.destination', read_only=True)
+
     class Meta:
-        model = schedule
+        model = Schedule
+        fields = [
+            'id',
+            'bus_name',
+            'travels_name',
+            'category',
+            'origin',
+            'destination',
+            'departure_time',
+            'arrival_time',
+            'fare_amount',
+            'travel_date',
+        ]
+
+
+
+# -------------------------------------------------------------------
+# ✅ Booking Serializer
+# -------------------------------------------------------------------
+class BookingSerializer(serializers.ModelSerializer):
+    schedule_details = ScheduleSerializer(source='schedule', read_only=True)
+
+    class Meta:
+        model = Booking
         fields = '__all__'
+
+from rest_framework import serializers
+from .models import Seat
 
 class SeatSerializer(serializers.ModelSerializer):
     class Meta:
-        model = seat
-        fields = '__all__'
-
-class BookingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = booking
-        fields = '__all__'
-
-# -- Registration serializer using Django's built-in User (recommended) --
-class UserRegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True, required=True, label="Confirm password")
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password', 'password2')
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-        return attrs
-
-    def create(self, validated_data):
-        username = validated_data['username']
-        email = validated_data['email']
-        password = validated_data['password']
-        user_instance = User.objects.create_user(username=username, email=email, password=password)
-        return user_instance
+        model = Seat
+        fields = ['seat_number', 'is_available']
