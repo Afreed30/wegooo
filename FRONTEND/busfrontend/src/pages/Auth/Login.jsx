@@ -24,7 +24,7 @@ export default function Login({ onLogin, switchToRegister }) {
       }
 
     } catch (err) {
-      setErrorMessage("Login failed");
+      setErrorMessage("Invalid credentials❌");
       setError(true);
 
       setTimeout(() => setError(false), 800);

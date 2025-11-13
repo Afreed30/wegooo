@@ -7,10 +7,10 @@ body{
 }
 .login-box{
     width: 380px;
-    height: 250px;
+    height: 290px;
     margin: 5% auto;
     padding: 40px;
-    background: lightblue blur(0px);
+    background: white;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
@@ -69,4 +69,9 @@ body{
 .login-link:hover {
   color: #ffffff;
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+.error-text {
+    color: red;
+    margin-bottom: 15px;
+    font-weight: bold;
 }

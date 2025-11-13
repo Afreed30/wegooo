@@ -15,7 +15,7 @@ export default function Header({ user, setView, onLogout }) {
         {user ? (
           <>
             <span className="user">
-              <span className="user-icon">👤</span> {user.username}
+              <span className="user-icon">🧑‍💼</span> {user.username}
             </span>
             <button className="logout" onClick={onLogout}>Logout</button>
           </>
