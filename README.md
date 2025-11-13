@@ -85,7 +85,7 @@ Ideal for learning, academic projects, or production-level development.
 - React.js  
 - Vite  
 - React Router  
-- CSS / Tailwind  
+- CSS 
 - Razorpay Checkout.js  
 
 ### Backend
@@ -104,7 +104,7 @@ Ideal for learning, academic projects, or production-level development.
 ## 📌 Clone Project
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/wegooo-bus.git
+git clone https://github.com/Afreed30/wegooo-bus.git
 cd wegooo-bus
 ```
 
@@ -310,7 +310,7 @@ Fix `VITE_API_BASE_URL`.
 ### Developer  
 **Afreed Shaik**  
 Full Stack Python Developer  
-GitHub: https://github.com/YOUR_USERNAME  
+GitHub: https://github.com/Afreed30
 
 ---
 
