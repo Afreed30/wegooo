@@ -11,7 +11,7 @@ import Register from "./pages/Auth/Register";
 import PaymentView from "./pages/Payment/PaymentView";
 import BookingsView from "./pages/Bookings/BookingsView";
 import TicketPreview from "./pages/TicketPreview/TicketPreview";
-
+import MergedBusSunsetBackground from "./BusCityBackground";
 
 export default function App() {
   const [view, setView] = useState(localStorage.getItem("view") || "search");
@@ -152,8 +152,8 @@ export default function App() {
 
   return (
     <div>
+      <MergedBusSunsetBackground />
       <Header user={user} setView={setView} onLogout={logout} />
-
       <div className="app-container">
         {view === "search" && <SearchView onSearch={handleSearch} />}
         {view === "results" && (
