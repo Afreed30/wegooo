@@ -1,178 +1,193 @@
-🚍 WEGOOO – Smart Bus Booking System
+# 🚍 WEGOOO – Smart Bus Booking System
 
-A modern full-stack bus reservation platform with seat selection, secure payments, booking history, authentication, and premium UI.
+A modern full-stack **bus reservation platform** with seat selection, secure payments, booking history, authentication, and premium UI.
 
-<p align="center"> <img src="https://img.shields.io/badge/WEGOOO%20BUS-v1.0-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/React-Frontend-61DBFB?style=for-the-badge&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/Django%20REST-Backend-092E20?style=for-the-badge&logo=django&logoColor=white"/> <img src="https://img.shields.io/badge/Razorpay-Payments-4C4CFF?style=for-the-badge&logo=razorpay&logoColor=white"/> </p>
-✨ About WEGOOO
+<p align="center">
+  <img src="https://img.shields.io/badge/WEGOOO%20BUS-v1.0-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/React-Frontend-61DBFB?style=for-the-badge&logo=react&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Django%20REST-Backend-092E20?style=for-the-badge&logo=django&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Razorpay-Payments-4C4CFF?style=for-the-badge&logo=razorpay&logoColor=white"/>
+</p>
+
+---
+
+## ✨ About WEGOOO
 
 WEGOOO is a complete bus ticket reservation system featuring:
 
-✔ Bus Search
-✔ Seat Selection
-✔ User Authentication
-✔ Razorpay Payment Gateway
-✔ Ticket PDF Generation
-✔ Booking Management
-✔ Fully Responsive UI
+✔ Bus Search  
+✔ Seat Selection  
+✔ User Authentication  
+✔ Razorpay Payment Gateway  
+✔ Ticket PDF Generation  
+✔ Booking Management  
+✔ Fully Responsive UI  
 
 Ideal for learning, academic projects, or production-level development.
 
-🌟 Features
-🧑‍💼 Authentication
+---
 
-Register, Login, Logout
+# 🌟 Features
 
-Token-based Authentication
+### 🧑‍💼 Authentication
+- Register, Login, Logout  
+- Token-based Authentication  
+- Protected Routes  
 
-Protected Routes
+### 🚌 Bus Search
+- Search by source, destination, travel date  
+- View bus details, price, availability  
 
-🚌 Bus Search
+### 💺 Seat Selection
+- Real-time seat map  
+- Occupied vs Available seats  
+- Visual UI with animations  
 
-Search by source, destination, travel date
+### 💳 Payments (Razorpay)
+- Order creation  
+- Razorpay checkout  
+- Payment verification  
+- Secure backend confirmation  
 
-View bus details, price, availability
+### 🎫 Bookings & Tickets
+- View booking history  
+- Ticket ID, bus details, seat number, passenger details  
+- Download Ticket PDF  
 
-💺 Seat Selection
+### 🎨 Modern UI
+- Attractive Login / Register  
+- Smooth Animations  
+- Vite + React + Custom CSS  
 
-Real-time seat map
+---
 
-Occupied vs Available seats
+# 🖼 Screenshots
 
-Visual UI with animations
+> *(Replace with your real screenshots)*
 
-💳 Payments (Razorpay)
+### Login Page  
+![Login](https://i.imgur.com/A2iUi7R.png)
 
-Order creation
+### Bus Search  
+![Search](https://i.imgur.com/jhFKc1R.png)
 
-Razorpay checkout
+### Seat Selection  
+![Seats](https://i.imgur.com/3vmgIiV.png)
 
-Payment verification
+### Booking Summary  
+![Booking](https://i.imgur.com/A5FPUg8.png)
 
-Secure backend confirmation
+---
 
-🎫 Bookings & Tickets
+# 🛠 Tech Stack
 
-View booking history
+### Frontend
+- React.js  
+- Vite  
+- React Router  
+- CSS / Tailwind  
+- Razorpay Checkout.js  
 
-Ticket ID, bus details, seat number, passenger details
+### Backend
+- Django  
+- Django REST Framework  
+- Token Authentication  
+- Razorpay SDK  
 
-Download Ticket PDF
+### Database
+- SQLite / PostgreSQL / MySQL  
 
-🎨 Modern UI
+---
 
-Attractive Login / Register
+# ⚙️ Installation Guide
 
-Smooth Animations
+## 📌 Clone Project
 
-Vite + React + Custom CSS
-
-🖼 Screenshots
-
-(Replace with your own screenshots)
-
-🔐 Login Page
-
-🚍 Bus Search
-
-💺 Seat Selection
-
-🧾 Booking Summary
-
-🛠 Tech Stack
-Frontend
-
-React.js
-
-Vite
-
-React Router
-
-Tailwind / Pure CSS
-
-Razorpay Checkout.js
-
-Backend
-
-Django
-
-Django REST Framework
-
-Token Authentication
-
-Razorpay Orders API
-
-Database
-
-SQLite / MySQL / PostgreSQL
-
-⚙️ Installation Guide
-📌 Clone Project
+```bash
 git clone https://github.com/YOUR_USERNAME/wegooo-bus.git
 cd wegooo-bus
+```
 
-🔧 Backend Setup (Django)
+---
+
+# 🔧 Backend Setup (Django)
+
+```bash
 cd backend
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
 
+Add Razorpay config in `settings.py`:
 
-Configure Razorpay in settings.py:
-
+```py
 RAZORPAY_KEY_ID = "your_key"
 RAZORPAY_KEY_SECRET = "your_secret"
+```
 
+Enable CORS:
 
-Add CORS:
-
+```py
 INSTALLED_APPS += ["corsheaders"]
 
 MIDDLEWARE = ["corsheaders.middleware.CorsMiddleware", *MIDDLEWARE]
 
 CORS_ALLOW_ALL_ORIGINS = True
+```
 
-💻 Frontend Setup (React)
+---
+
+# 💻 Frontend Setup (React)
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
+Create `.env`:
 
-Configure API Base URL:
-
-Create .env:
-
+```
 VITE_API_BASE_URL=http://127.0.0.1:8000/api
-
+```
 
 Use in code:
 
+```js
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+```
 
-🔌 API Endpoints
-Auth Endpoints
-Method	URL	Description
-POST	/api/register/	Create account
-POST	/api/login/	Login user
-POST	/api/logout/	Logout
-Bus Search
+---
 
-| GET | /api/search-buses/?origin=A&destination=B&travel_date=2025-03-10 |
+# 🔌 API Endpoints
 
-Seats
+### Authentication
+| Method | URL | Description |
+|--------|------|-------------|
+| POST | /api/register/ | Create account |
+| POST | /api/login/ | Login user |
+| POST | /api/logout/ | Logout |
 
-| GET | /api/schedules/:id/seats/ |
+### Bus Search
+`GET /api/search-buses/?origin=A&destination=B&travel_date=2025-03-10`
 
-Bookings
+### Seats  
+`GET /api/schedules/:id/seats/`
 
-| GET | /api/bookings/ |
-| POST | /api/bookings/ |
+### Bookings  
+`GET /api/bookings/`  
+`POST /api/bookings/`
 
-Payments
+### Payments  
+`POST /api/create-payment-order/`  
+`POST /api/verify-payment/`
 
-| POST | /api/create-payment-order/ |
-| POST | /api/verify-payment/ |
+---
 
-🗂 Folder Structure
+# 🗂 Folder Structure
+
+```
 WEGOOO/
 │
 ├── backend/
@@ -191,93 +206,111 @@ WEGOOO/
 │   └── vite.config.js
 │
 └── README.md
+```
 
-🚀 Deployment Guide
-🟩 Deploy Backend (Django) on Render
-1️⃣ Create Web Service
+---
 
-Login to https://render.com
+# 🚀 Deployment Guide
 
-New → Web Service
+# 🟩 Deploy Backend (Django) on Render
 
-Connect GitHub repo
+### 1️⃣ Create Web Service  
+Go to Render → New → Web Service → Select Repo
 
-Select backend folder
-
-2️⃣ Build Command
+### 2️⃣ Build Command  
+```
 pip install -r requirements.txt
+```
 
-3️⃣ Start Command
+### 3️⃣ Start Command  
+```
 gunicorn backend.wsgi:application
+```
 
-4️⃣ Environment Variables
+### 4️⃣ Environment Variables  
 
-Add in Render → Environment:
-
+```
 SECRET_KEY=your_secret
 DEBUG=False
 ALLOWED_HOSTS=yourapp.onrender.com
 RAZORPAY_KEY_ID=
 RAZORPAY_KEY_SECRET=
 CORS_ALLOWED_ORIGINS=https://your-frontend.vercel.app
+```
 
-🟦 Deploy Frontend (React) on Vercel
-1️⃣ Push frontend to GitHub
-2️⃣ Import Project in Vercel
+---
 
-Vercel auto detects Vite.
+# 🟦 Deploy Frontend (React) on Vercel
 
-Build Settings:
+### 1️⃣ Push frontend to GitHub  
+### 2️⃣ Import repo into Vercel
+
+Vercel will auto-detect Vite.
+
+### Build Settings:
+
+```
 Build Command: npm run build
 Output Directory: dist
+```
 
-3️⃣ Add Environment Variable:
+### 3️⃣ Add Environment Variable
+
+```
 VITE_API_BASE_URL=https://your-backend.onrender.com/api
+```
 
-🟧 Razorpay Production Setup
-Replace test keys with live keys:
+---
 
-Backend:
+# 🟧 Razorpay Live Setup
 
+Replace test keys with live ones in backend:
+
+```
 RAZORPAY_KEY_ID=live_key
 RAZORPAY_KEY_SECRET=live_secret
+```
 
+And frontend:
 
-Frontend:
-
+```js
 key: "LIVE_KEY_ID"
+```
 
+Add allowed domain in Razorpay Dashboard:
 
-Enable Allowed Origins in Razorpay Dashboard:
-
+```
 https://your-frontend.vercel.app
+```
 
-❗ Common Deployment Issues
-🔥 CORS error
+---
 
-Fix with:
+# ❗ Common Deployment Issues
 
-CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend.vercel.app"
-]
+### 🔥 CORS Errors  
+Add:
 
-🔥 500 Internal Server Error
+```py
+CORS_ALLOWED_ORIGINS = ["https://your-frontend.vercel.app"]
+```
 
+### 🔥 500 Payment Error  
 Missing Razorpay keys.
 
-🔥 404 API Not Found
+### 🔥 Frontend White Screen  
+Wrong build output → use `dist`.
 
-Check VITE_API_BASE_URL.
+### 🔥 API Not Found  
+Fix `VITE_API_BASE_URL`.
 
-🔥 White screen on Vercel
+---
 
-Wrong build paths → ensure output directory is dist.
+# ❤️ Credits
 
-❤️ Credits
+### Developer  
+**Afreed Shaik**  
+Full Stack Python Developer  
+GitHub: https://github.com/YOUR_USERNAME  
 
-Developed by:
+---
 
-Afreed Shaik
-
-💼 Full Stack Python Developer
-🌐 GitHub: https://github.com/Afreed30
