@@ -1,6 +1,5 @@
 .register-box {
-  background: #ffffff;
-  background:url('../../PUBLIC/background6.jpg') center center ;
+  background: #ffffff blur(10px);
   width: 100%;
   max-width: 350px;
   margin: 60px auto;
@@ -15,7 +14,7 @@
 .register-title {
   font-size: 1.8rem;
   font-weight: 700;
-  font-family: cursive;
+  font-family: serif;
   font-style: italic;
   color: white;
   text-align: center;
