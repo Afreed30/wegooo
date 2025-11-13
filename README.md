@@ -310,7 +310,7 @@ Fix `VITE_API_BASE_URL`.
 ### Developer  
 **Afreed Shaik**  
 Full Stack Python Developer  
-GitHub: https://github.com/YOUR_USERNAME  
+GitHub: https://github.com/Afreed30  
 
 ---
 
