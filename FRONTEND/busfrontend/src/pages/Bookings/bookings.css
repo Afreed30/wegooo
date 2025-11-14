@@ -6,7 +6,7 @@
 }
 
 .booking-card {
-  background: #ffffff;
+  background:rgba(0, 0, 0, 0.6);
   padding: 16px;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
@@ -22,7 +22,7 @@
 .booking-id {
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .status-badge {
@@ -48,9 +48,9 @@
 }
 
 .booking-details {
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 14px;
-  color: #374151;
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -58,7 +58,7 @@
 
 .booking-details span {
   font-weight: 600;
-  color: #111827;
+  color: white;
 }
 
 .booking-footer {
@@ -71,7 +71,7 @@
 .booking-price {
   font-size: 20px;
   font-weight: 700;
-  color: #6d28d9;
+  color: white;
 }
 
 .ticket-btn {
@@ -94,3 +94,7 @@
   color: #6b7280;
   font-size: 14px;
 }
+
+.booking-details .items {
+  margin-bottom: 6px;
+} 

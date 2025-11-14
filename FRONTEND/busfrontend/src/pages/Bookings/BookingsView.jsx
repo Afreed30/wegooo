@@ -17,11 +17,11 @@ export default function BookingsView({ bookings,setPreviewBooking }) {
           </div>
 
           <div className="booking-details">
-            <div><span>Passenger:</span> {b.passenger_name || "-"}</div>
-            <div><span>Bus:</span> {b.schedule_details?.bus_details?.name || "-"}</div>
-            <div><span>Route:</span> {b.schedule_details?.route_details?.origin || "-"} → {b.schedule_details?.route_details?.destination || "-"}</div>
-            <div><span>Date:</span> {b.schedule_details?.travel_date || "-"}</div>
-            <div><span>Seat:</span> {b.seat_details?.seat_number || "-"}</div>
+            <div className="items"><span>Passenger:</span> {b.passenger_name || "-"}</div>
+            <div className="items"><span>Bus:</span> {b.schedule_details?.bus_details?.name || "-"}</div>
+            <div className="items"><span>Route:</span> {b.schedule_details?.route_details?.origin || "-"} → {b.schedule_details?.route_details?.destination || "-"}</div>
+            <div className="items"><span>Date:</span> {b.schedule_details?.travel_date || "-"}</div>
+            <div className="items"><span>Seat:</span> {b.seat_details?.seat_number || "-"}</div>
           </div>
           <div className="booking-footer">
             <div className="booking-price">₹{b.price}</div>
