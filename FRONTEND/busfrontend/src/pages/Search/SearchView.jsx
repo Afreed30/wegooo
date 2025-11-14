@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import "./search.css"; // <-- add this
+import "./search.css";
 
 export default function SearchView({ onSearch }) {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
 
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+
+        const selectedDate = new Date(date);
+        const todayDate = new Date();
+        todayDate.setHours(0, 0, 0, 0);
+
+        // ❌ Past date safety check
+        if (selectedDate < todayDate) {
+          onSearch(origin, destination, []);
+          return;
+        }
+
         onSearch(origin, destination, date);
       }}
       className="search-box"
@@ -33,6 +46,7 @@ export default function SearchView({ onSearch }) {
       <input
         type="date"
         className="search-input"
+        min={today}   // 🔥 Prevent selecting past date
         onChange={(e) => setDate(e.target.value)}
         required
       />

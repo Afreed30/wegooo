@@ -4,11 +4,11 @@
     height: 290px;
     margin: 5% auto;
     padding: 40px;
-    background: white blur(10px);
+    background: white blur(100px);
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
-   
+    backdrop-filter: blur(10px);   
 }
 .login-box h2{
     margin: 0 0 30px;
