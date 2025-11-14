@@ -1,11 +1,17 @@
 import React from "react";
-import "./results.css"; // (optional if you style)
+import "./results.css";
 
 export default function ResultsView({ results, onSelectBus, setView }) {
   // If no buses found
   if (!results || results.length === 0) {
     return (
       <div className="no-results-box">
+
+        {/* 😭 Crying Passenger Animation */}
+        <div className="crying-passenger">
+          😭
+        </div>
+
         <h2 className="no-results-title">No Buses Found</h2>
         <p className="no-results-text">
           Sorry, there are no buses available for the selected route and date.

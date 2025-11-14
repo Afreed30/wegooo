@@ -6,7 +6,7 @@ export default function SearchView({ onSearch }) {
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
 
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0]; 
 
   return (
     <form
@@ -46,7 +46,7 @@ export default function SearchView({ onSearch }) {
       <input
         type="date"
         className="search-input"
-        min={today}   // 🔥 Prevent selecting past date
+        min={today}   
         onChange={(e) => setDate(e.target.value)}
         required
       />
