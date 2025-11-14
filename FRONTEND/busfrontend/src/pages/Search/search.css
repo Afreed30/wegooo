@@ -1,7 +1,7 @@
 .search-box {
-  background: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
   width: 100%;
-  max-width: 420px;
+  max-width: 430px;
   margin: 60px auto;
   padding: 28px;
   border-radius: 12px;
@@ -13,14 +13,17 @@
 
 .search-title {
   text-align: center;
-  font-size: 22px;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: bold;
+  font-size: 35px;
   font-weight: 600;
-  color: #1e293b;
+  color: white;
   margin-bottom: 6px;
 }
 
 .search-input {
-  width: 100%;
+  text-align: center;
+  width: 95%;
   padding: 12px;
   border-radius: 6px;
   border: 1px solid #d1d5db;
@@ -46,5 +49,6 @@
 }
 
 .search-btn:hover {
-  background: #1d4ed8;
+  color: #e0e7ff;
+  background: green;
 }

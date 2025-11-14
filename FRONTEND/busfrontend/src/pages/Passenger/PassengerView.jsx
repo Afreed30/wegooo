@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./passenger.css"; // <-- add this
+import "./passenger.css"; 
 
 export default function PassengerView({ picked, schedule, onSubmit }) {
   const [form, setForm] = useState({
