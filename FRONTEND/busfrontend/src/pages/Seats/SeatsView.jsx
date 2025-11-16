@@ -2,11 +2,9 @@ import React from "react";
 import "./seats.css";
 
 /**
- * NOTE ON SEAT ORDER:
- * - Because your Seat model has no row/col/deck, we map seats in array order.
- * - For "SS" (Sleeper+Seater) and "Sleeper", we split the array in half:
- *   upper = first half, lower = second half.
- * - If you later add row/col/deck in DB, we can place precisely.
+ * SEATS VIEW (FIXED VERSION)
+ * This version stores picked seat in localStorage
+ * so it stays available when navigating to Passenger page.
  */
 
 export default function SeatsView({ seats = [], schedule, picked, setPicked }) {
@@ -17,12 +15,14 @@ export default function SeatsView({ seats = [], schedule, picked, setPicked }) {
   const isSleeper = category.includes("sleeper") && !category.includes("seater");
   const isCombo = category.includes("sleeper") && category.includes("seater"); // SS
 
+  // FIXED → Save picked seat in localStorage
   const tryPick = (seat) => {
     if (!seat?.is_available) return;
     setPicked(seat);
+    localStorage.setItem("picked", JSON.stringify(seat));  // ⭐ IMPORTANT FIX ⭐
   };
 
-  // Split into upper/lower for sleeper & combo (SS)
+  // Split into upper/lower for sleeper / combo
   const mid = Math.ceil(seats.length / 2);
   const upper = seats.slice(0, mid);
   const lower = seats.slice(mid);
@@ -80,7 +80,7 @@ export default function SeatsView({ seats = [], schedule, picked, setPicked }) {
   );
 }
 
-/* ---------- Layout helpers (RedBus-style rows with an aisle) ---------- */
+/* ---------- (Rest of the file is unchanged) ---------- */
 
 function chunkIntoRows(list, seatsPerRow) {
   const rows = [];
@@ -90,9 +90,7 @@ function chunkIntoRows(list, seatsPerRow) {
   return rows;
 }
 
-/** Seater 2x2: [L1, L2]  aisle  [R1, R2] per row */
 function Seater2x2({ seats, picked, price, onPick }) {
-  // 4 per row, split 2|2 with aisle gap
   const rows = chunkIntoRows(seats, 4);
   return (
     <div className="rb-bus">
@@ -119,9 +117,7 @@ function Seater2x2({ seats, picked, price, onPick }) {
   );
 }
 
-/** Sleeper horizontal 2x2: [🛏 🛏] aisle [🛏 🛏] per row */
 function Sleeper2x2({ seats, picked, price, onPick }) {
-  // 4 per row, but each sleeper is a wide rectangle
   const rows = chunkIntoRows(seats, 4);
   return (
     <div className="rb-bus">
@@ -147,20 +143,17 @@ function Sleeper2x2({ seats, picked, price, onPick }) {
     </div>
   );
 }
-
-/* ---------- Seat atoms ---------- */
 
 function SeaterSeat({ seat, picked, price, onPick }) {
   if (!seat) return <div className="rb-seat rb-empty" />;
   const sold = !seat.is_available;
   const selected = picked?.id === seat.id;
-  const cls = [
-    "rb-seat",
-    sold ? "rb-sold" : "rb-available",
-    selected ? "rb-selected" : "",
-  ].join(" ");
   return (
-    <button className={cls} disabled={sold} onClick={() => onPick(seat)}>
+    <button
+      className={`rb-seat ${sold ? "rb-sold" : "rb-available"} ${selected ? "rb-selected" : ""}`}
+      disabled={sold}
+      onClick={() => onPick(seat)}
+    >
       <div className="rb-seat-no">{seat.seat_number}</div>
       {!sold ? <div className="rb-seat-price">₹{price}</div> : <div className="rb-sold-mark">X</div>}
     </button>
@@ -171,20 +164,17 @@ function SleeperSeat({ seat, picked, price, onPick }) {
   if (!seat) return <div className="rb-sleeper rb-empty" />;
   const sold = !seat.is_available;
   const selected = picked?.id === seat.id;
-  const cls = [
-    "rb-sleeper",
-    sold ? "rb-sold" : "rb-available",
-    selected ? "rb-selected" : "",
-  ].join(" ");
   return (
-    <button className={cls} disabled={sold} onClick={() => onPick(seat)}>
+    <button
+      className={`rb-sleeper ${sold ? "rb-sold" : "rb-available"} ${selected ? "rb-selected" : ""}`}
+      disabled={sold}
+      onClick={() => onPick(seat)}
+    >
       <div className="rb-seat-no">{seat.seat_number}</div>
       {!sold ? <div className="rb-seat-price">₹{price}</div> : <div className="rb-sold-mark">X</div>}
     </button>
   );
 }
-
-/* ---------- UI bits ---------- */
 
 function DeckHeader({ label }) {
   return <h3 className="rb-deck-title">{label}</h3>;
@@ -208,6 +198,7 @@ function SeatLegend() {
     </div>
   );
 }
+
 function LegendItem({ colorClass, label }) {
   return (
     <div className="rb-legend-item">

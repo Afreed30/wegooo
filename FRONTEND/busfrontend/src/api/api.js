@@ -48,20 +48,21 @@ export const api = {
 
   // ------------------------ BOOKING ------------------------
   createBooking: (scheduleId, seatId, passenger) =>
-    fetch(`${API_BASE_URL}/bookings/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...authHeaders(),
-      },
-      body: JSON.stringify({
-        schedule: scheduleId,
-        seat: seatId,
-        passenger_name: passenger.passenger_name,
-        passenger_age: passenger.passenger_age,
-        passenger_gender: passenger.passenger_gender,
-      }),
-    }).then((res) => res.json()),
+  fetch(`${API_BASE_URL}/bookings/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeaders(),
+    },
+    body: JSON.stringify({
+      schedule: scheduleId,
+      seat: seatId,
+      passenger_name: passenger.passenger_name,
+      passenger_age: passenger.passenger_age,
+      passenger_gender: passenger.passenger_gender,
+    }),
+  }).then((res) => res.json()),
+
 
   getBookings: () =>
     fetch(`${API_BASE_URL}/bookings/`, {
@@ -70,14 +71,15 @@ export const api = {
 
   // ------------------------ PAYMENT ------------------------
   createPaymentOrder: (bookingId) =>
-    fetch(`${API_BASE_URL}/create-payment-order/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...authHeaders(),
-      },
-      body: JSON.stringify({ booking_id: bookingId }),
-    }).then((res) => res.json()),
+  fetch(`${API_BASE_URL}/create-payment-order/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeaders(),
+    },
+    body: JSON.stringify({ booking_id: bookingId }),
+  }).then((res) => res.json()),
+
 
   verifyPayment: (data) =>
     fetch(`${API_BASE_URL}/verify-payment/`, {

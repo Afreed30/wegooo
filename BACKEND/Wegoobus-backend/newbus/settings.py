@@ -157,5 +157,6 @@ REST_FRAMEWORK = {
 }
 
 # Razorpay Settings
-RAZORPAY_KEY_ID = "rzp_test_Rc9a1tetxWiY2z"
-RAZORPAY_KEY_SECRET = "UeeJvzEFnKsurJndj6NLEDsp"
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+

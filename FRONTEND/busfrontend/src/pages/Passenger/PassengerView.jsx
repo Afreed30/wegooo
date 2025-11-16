@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./passenger.css"; 
+import "./passenger.css";
 
 export default function PassengerView({ picked, schedule, onSubmit }) {
   const [form, setForm] = useState({
@@ -10,6 +10,8 @@ export default function PassengerView({ picked, schedule, onSubmit }) {
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
+  console.log("FULL SCHEDULE =", schedule);
+  console.log("FULL PICKED =", picked);
 
   return (
     <div className="passenger-box">
@@ -17,21 +19,12 @@ export default function PassengerView({ picked, schedule, onSubmit }) {
 
       <div className="passenger-field">
         <label>Passenger Name</label>
-        <input
-          name="name"
-          onChange={handleChange}
-          required
-        />
+        <input name="name" onChange={handleChange} required />
       </div>
 
       <div className="passenger-field">
         <label>Age</label>
-        <input
-          type="number"
-          name="age"
-          onChange={handleChange}
-          required
-        />
+        <input type="number" name="age" onChange={handleChange} required />
       </div>
 
       <div className="passenger-field">
@@ -48,10 +41,7 @@ export default function PassengerView({ picked, schedule, onSubmit }) {
         {schedule?.bus_details?.name}
       </div>
 
-      <button
-        className="passenger-btn"
-        onClick={() => onSubmit(form)}
-      >
+      <button className="passenger-btn" onClick={() => onSubmit(form)}>
         Continue to Payment
       </button>
     </div>

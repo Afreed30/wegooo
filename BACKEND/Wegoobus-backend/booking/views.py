@@ -172,6 +172,9 @@ class BookingViewSet(viewsets.ModelViewSet):
 @api_view(['POST'])
 def create_payment_order(request):
     booking_id = request.data.get('booking_id')
+    print("DJANGO KEY =", settings.RAZORPAY_KEY_ID)
+    print("DJANGO SECRET =", settings.RAZORPAY_KEY_SECRET)
+
 
     try:
         booking = Booking.objects.get(id=booking_id, user=request.user)
