@@ -142,7 +142,8 @@ export default function App() {
     amount: orderData.amount,
     currency: orderData.currency,
     order_id: orderData.order_id,
-    name: "Bus Ticket Booking",
+    name: "WEGOOO Bus Services",
+    image: "https://raw.githubusercontent.com/youruser/yourrepo/main/logo.png",
     handler: async (response) => {
       await api.verifyPayment({
         razorpay_payment_id: response.razorpay_payment_id,
