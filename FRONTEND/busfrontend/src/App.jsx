@@ -180,8 +180,7 @@ export default function App() {
   return (
     <div>
       <MergedBusSunsetBackground />
-      <Header user={user} setView={setView} onLogout={logout} />
-
+      <Header user={user} setView={setView} view={view} onLogout={logout} />
       <div className="app-container">
 
         {view === "search" && <SearchView onSearch={handleSearch} />}
